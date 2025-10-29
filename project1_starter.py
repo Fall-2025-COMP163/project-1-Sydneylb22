@@ -3,7 +3,7 @@ COMP 163 - Project 1: Character Creator & Saving/Loading
 Name: Sydney Brown
 Date: 10/25/2025
 
-AI Usage: [Document any AI assistance used]
+AI Usage: [AI created the entire code]
 Example: AI helped with file I/O error handling logic in save_character function
 """
 
