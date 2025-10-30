@@ -78,26 +78,28 @@ def save_character(character, filename):
     Saves character to text file in specific format.
     Returns True if successful, False if error.
     """
-    # Since no try/except allowed, handle through logic
-    if not character or "name" not in character:
+    # Handle invalid inputs
+    if not character or "name" not in character or filename == "":
         return False
 
-    if filename == "":
+    # Extract directory (if any) and check that it exists
+    # Example: '/invalid/directory/path/test.txt' → '/invalid/directory/path'
+    directory = os.path.dirname(filename)
+    if directory != "" and not os.path.exists(directory):
+        # Directory doesn’t exist → fail gracefully
         return False
 
+    # Now it's safe to open
     file = open(filename, "w")
-    if file:
-        file.write(f"Character Name: {character['name']}\n")
-        file.write(f"Class: {character['class']}\n")
-        file.write(f"Level: {character['level']}\n")
-        file.write(f"Strength: {character['strength']}\n")
-        file.write(f"Magic: {character['magic']}\n")
-        file.write(f"Health: {character['health']}\n")
-        file.write(f"Gold: {character['gold']}\n")
-        file.close()
-        return True
-    else:
-        return False
+    file.write(f"Character Name: {character['name']}\n")
+    file.write(f"Class: {character['class']}\n")
+    file.write(f"Level: {character['level']}\n")
+    file.write(f"Strength: {character['strength']}\n")
+    file.write(f"Magic: {character['magic']}\n")
+    file.write(f"Health: {character['health']}\n")
+    file.write(f"Gold: {character['gold']}\n")
+    file.close()
+    return True
 
 
 def load_character(filename):
