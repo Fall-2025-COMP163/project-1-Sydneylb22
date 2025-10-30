@@ -34,13 +34,10 @@ def calculate_stats(character_class, level):
 
 
 # Function to create a character
-def create_character(name):
-    print("=== Create Your Character ===")
-    print("Choose a class: Warrior, Mage, Rogue, Cleric")
-    character_class = input("Enter character class: ")
-
+def create_character(name, character_class):
     # Validate class
-    if character_class not in ["Warrior", "Mage", "Rogue", "Cleric"]:
+    valid_classes = ["Warrior", "Mage", "Rogue", "Cleric"]
+    if character_class not in valid_classes:
         print("Error: Invalid class.")
         return {"name": name}
 
@@ -77,9 +74,11 @@ def level_up(level, character_class):
 # Main program
 def main():
     name = input("Enter character name: ")
-    character = create_character(name)
+    print("Choose a class: Warrior, Mage, Rogue, Cleric")
+    character_class = input("Enter character class: ")
+    character = create_character(name, character_class)
 
-    # Check if character creation failed
+    # Check if creation failed
     if isinstance(character, dict):
         return
 
@@ -100,6 +99,5 @@ def main():
         print("Gold:", gold)
 
 
-# Run the main function
 if __name__ == "__main__":
     main()
