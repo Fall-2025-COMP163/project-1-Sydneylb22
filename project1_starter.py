@@ -32,15 +32,15 @@ def calculate_stats(character_class, level):
 
     return strength, magic, health
 
+
 # Function to create a character
 def create_character(name):
     print("=== Create Your Character ===")
-    name = input("Enter character name: ")
     print("Choose a class: Warrior, Mage, Rogue, Cleric")
     character_class = input("Enter character class: ")
 
     # Validate class
-    if character_class != "Warrior" and character_class != "Mage" and character_class != "Rogue" and character_class != "Cleric":
+    if character_class not in ["Warrior", "Mage", "Rogue", "Cleric"]:
         print("Error: Invalid class.")
         return {"name": name}
 
@@ -59,6 +59,7 @@ def create_character(name):
 
     return name, character_class, level, strength, magic, health, gold
 
+
 # Function to level up
 def level_up(level, character_class):
     level += 1
@@ -72,13 +73,21 @@ def level_up(level, character_class):
     print("Gold Bonus:", gold_bonus)
     return level, strength, magic, health, gold_bonus
 
+
 # Main program
 def main():
-    name, character_class, level, strength, magic, health, gold = create_character()
+    name = input("Enter character name: ")
+    character = create_character(name)
+
+    # Check if character creation failed
+    if isinstance(character, dict):
+        return
+
+    name, character_class, level, strength, magic, health, gold = character
 
     # Ask if user wants to level up
     answer = input("\nDo you want to level up? (yes/no): ")
-    if answer == "yes":
+    if answer.lower() == "yes":
         level, strength, magic, health, bonus = level_up(level, character_class)
         gold += bonus
         print("\nUpdated Character Stats:")
@@ -90,4 +99,7 @@ def main():
         print("Health:", health)
         print("Gold:", gold)
 
-main()
+
+# Run the main function
+if __name__ == "__main__":
+    main()
