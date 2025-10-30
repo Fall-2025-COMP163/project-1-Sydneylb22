@@ -33,7 +33,7 @@ def calculate_stats(character_class, level):
     return strength, magic, health
 
 # Function to create a character
-def create_character():
+def create_character(name):
     print("=== Create Your Character ===")
     name = input("Enter character name: ")
     print("Choose a class: Warrior, Mage, Rogue, Cleric")
@@ -42,7 +42,7 @@ def create_character():
     # Validate class
     if character_class != "Warrior" and character_class != "Mage" and character_class != "Rogue" and character_class != "Cleric":
         print("Error: Invalid class.")
-        return
+        return {"name": name}
 
     level = 1
     gold = 100
